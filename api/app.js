@@ -7,9 +7,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
 var app = express();
 
 // console.log("ENVIRONMENT: ", process.env);
@@ -25,13 +22,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  console.log('Starting')
+  console.log('middleware is running')
   next();
-  //next(); -> bir sonraki app.usee fonksiyonuna git.
+  //next(); -> bir sonraki app.use fonksiyonuna git.
 })
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api', require('./routes/index')); //http://localhost:3000
+// app.use('/users', require('./routes/users')); 
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
