@@ -5,13 +5,12 @@ const schema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    permission:{
+    permission: {
         type: String,
         required: true
     },
     createdBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
+        type: mongoose.Schema.Types.ObjectId
     },
 }, {
     versionKey: false,

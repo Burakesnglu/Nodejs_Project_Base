@@ -2,12 +2,11 @@ var express = require('express');
 var router = express.Router();
 const Categories = require('../db/models/Categories');
 const Response = require('../lib/Response');
-const Error = require('../lib/Error');
 const CustomError = require('../lib/Error');
 const Enum = require('../config/Enum');
 
 /* GET users listing. */
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
 
     try {
         let categories = await Categories.find({});
@@ -16,7 +15,7 @@ router.get('/', async (req, res, next) => {
 
     } catch (error) {
         let errorResponse = Response.errorResponse(error);
-        res.status(errorResponse.code).json(Response.errorResponse(error));
+        res.status(errorResponse.code).json(errorResponse);
     }
 });
 

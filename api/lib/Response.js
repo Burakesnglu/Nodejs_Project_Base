@@ -22,15 +22,16 @@ class Response {
                     description: error.description
                 }
             }
-        }
-
-        return {
-            code: Enum.HTTP_CODES.INTERNAL_SERVER_ERROR,
-            error: {
-                message: "Unknown Error!",
-                description: error.message
+        } else if (error.message.includes("E11000")) {
+            return {
+                code: Enum.HTTP_CODES.CONFLICT,
+                error: {
+                    message: "Already Exists!",
+                    description: "Already Exists!"
+                }
             }
         }
+
     }
 
 }
