@@ -89,8 +89,7 @@ router.post('/update', async (req, res, next) => {
             let newPermissions = body.permissions.filter(x => !permissions.map(p => p.permission).includes(x));
 
             if (removedPermissions.length > 0) {
-                // await RolePrivileges.deleteOne({ _id: { $in: removedPermissions.map(x => x._id) } });
-                //role siliniyor ama permissionlar silinmiyor.
+                // await RolePrivileges.deleteOne({ _id: { $in: removedPermissions.map(x => x._id) } }); 
                 await RolePrivileges.deleteMany({ _id: removedPermissions.map(x => x._id) });
                 //deleteMany kullanılabilir
             }
