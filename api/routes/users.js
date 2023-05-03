@@ -110,7 +110,7 @@ router.post('/update', async (req, res, next) => {
 
       let userRoles = await UserRoles.find({ userId: body._id })
 
-      let removedRoles = userRoles.filter(x => !body.roles.includes(x.roleId.toString()));
+      let removedRoles = userRoles.filter(x => !body.roles.includes(x.roleId));
       let newRoles = body.roles.filter(x => !userRoles.map(r => r.roleId).includes(x));
       //eski userrolesı silmiyor!
 
