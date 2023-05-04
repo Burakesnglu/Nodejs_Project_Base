@@ -63,11 +63,19 @@ module.exports = {
         NETWORK_AUTHENTICATION_REQUIRED: 511
 
     },
-    PASS_LENGTH:8,
-    ROLES:{
+    PASS_LENGTH: 8,
+    ROLES: {
         SUPER_ADMIN: "SUPER_ADMIN",
         ADMIN: "ADMIN",
         CUSTOMER: "CUSTOMER",
         VISITOR: "VISITOR",
+    },
+    LOG_LEVELS: {
+        "INFO": "INFO",
+        "WARN": "WARN",
+        "ERROR": "ERROR",
+        "DEBUG": "DEBUG",
+        "VERBOSE": "VERBOSE",
+        "HTTP": "HTTP"
     }
 }

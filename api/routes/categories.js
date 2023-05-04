@@ -3,6 +3,7 @@ var router = express.Router();
 const Categories = require('../db/models/Categories');
 const Response = require('../lib/Response');
 const CustomError = require('../lib/Error');
+const AuditLogs = require('../lib/AuditLogs');
 const Enum = require('../config/Enum');
 
 /* GET users listing. */
@@ -36,6 +37,8 @@ router.post('/add', async (req, res, next) => {
 
         await category.save();
 
+        AuditLogs.info(req.user?.email, "Categories", "Add", category)
+
         res.json(Response.successResponse({ success: true }));
 
     } catch (error) {
@@ -61,6 +64,8 @@ router.post('/update', async (req, res, next) => {
 
         await Categories.updateOne({ _id: body._id }, updates)
 
+        AuditLogs.info(req.user?.email, "Categories", "Update", { _id: body._id, ...updates })
+
         res.json(Response.successResponse({ success: true }));
 
     } catch (error) {
@@ -80,6 +85,8 @@ router.post('/delete', async (req, res, next) => {
         if (!body._id) throw new CustomError(Enum.HTTP_CODES.BAD_REQUEST, "Validation Error!", "_id field must be filled");
 
         await Categories.deleteOne({ _id: body._id });
+
+        AuditLogs.info(req.user?.email, "Categories", "Add", { _id: body._id })
 
         res.json(Response.successResponse({ success: true }));
 

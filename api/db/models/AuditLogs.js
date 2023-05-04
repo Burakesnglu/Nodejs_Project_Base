@@ -15,7 +15,7 @@ const schema = mongoose.Schema({
         type: String,
     },
     log: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed,
     }
 }, {
     versionKey: false,
