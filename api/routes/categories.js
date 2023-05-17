@@ -6,6 +6,11 @@ const CustomError = require('../lib/Error');
 const AuditLogs = require('../lib/AuditLogs');
 const Enum = require('../config/Enum');
 const logger = require('../lib/logger/LoggerClass');
+const auth = require("../lib/auth")();
+
+router.all("*", auth.authenticate(), (req, res, next) => {
+    next();
+})
 
 /* GET users listing. */
 router.get('/', async (req, res) => {
