@@ -13,7 +13,7 @@ router.all("*", auth.authenticate(), (req, res, next) => {
 })
 
 /* GET users listing. */
-router.get('/', async (req, res) => {
+router.get('/', auth.checkRoles("category_view"), async (req, res) => {
 
     try {
         let categories = await Categories.find({});
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 });
 
 
-router.post('/add', async (req, res, next) => {
+router.post('/add', auth.checkRoles("category_add"), async (req, res, next) => {
 
     let body = req.body
 
@@ -44,7 +44,7 @@ router.post('/add', async (req, res, next) => {
         await category.save();
 
         AuditLogs.info(req.user?.email, "Categories", "Add", category)
-        
+
         logger.info(req.user?.email, "Categories", "Add", category)
 
         res.json(Response.successResponse({ success: true }));
@@ -58,7 +58,7 @@ router.post('/add', async (req, res, next) => {
 
 })
 
-router.post('/update', async (req, res, next) => {
+router.post('/update', auth.checkRoles("category_update"), async (req, res, next) => {
 
     let body = req.body
 
@@ -85,7 +85,7 @@ router.post('/update', async (req, res, next) => {
 
 })
 
-router.post('/delete', async (req, res, next) => {
+router.post('/delete', auth.checkRoles("category_delete"), async (req, res, next) => {
 
     let body = req.body
 

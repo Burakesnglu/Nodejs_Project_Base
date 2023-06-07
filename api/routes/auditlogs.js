@@ -10,7 +10,7 @@ router.all("*", auth.authenticate(), (req, res, next) => {
     next();
 })
 
-router.get("/", async (req, res, next) => {
+router.get("/", auth.checkRoles("auditlogs_view"), async (req, res, next) => {
 
     try {
 
